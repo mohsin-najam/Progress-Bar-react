@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
+import React,{useEffect, useState,} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ProgressBar from "./Progress"
+
+
+export default function App() {
+    const [value, setValue] =useState(0);
+
+    useEffect(()=>{
+      const interval = setInterval(()=>{
+        setValue((oldValue)=>{
+          const newValue = oldValue + 10;
+
+          if(newValue === 100){
+            clearInterval(interval);
+          }
+          return newValue;
+        })
+      },400)
+    },[]);
+      return <ProgressBar value={value} max={100} />
 }
-
-export default App;
